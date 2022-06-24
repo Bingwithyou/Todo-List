@@ -1,30 +1,34 @@
 <template>
-  <li>
-    <label>
-      <input
-        type="checkbox"
-        :checked="todo.done"
-        @change="handleCheck(todo.id)"
-      />
-      <span v-show="!todo.isEdit">{{ todo.title }}</span>
-      <input
-        v-show="todo.isEdit"
-        type="text"
-        name="edit"
-        :value="todo.title"
-        @blur="confirmEdit(todo, $event)"
-        ref="inputContent"
-      />
-    </label>
-    <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
-    <button
-      v-show="!todo.isEdit"
-      class="btn btn-edit"
-      @click="handleEdit(todo)"
-    >
-      编辑
-    </button>
-  </li>
+  <transition name="todo" appear>
+    <li>
+      <label>
+        <input
+          type="checkbox"
+          :checked="todo.done"
+          @change="handleCheck(todo.id)"
+        />
+        <span v-show="!todo.isEdit">{{ todo.title }}</span>
+        <input
+          v-show="todo.isEdit"
+          type="text"
+          name="edit"
+          :value="todo.title"
+          @blur="confirmEdit(todo, $event)"
+          ref="inputContent"
+        />
+      </label>
+      <button class="btn btn-danger" @click="handleDelete(todo.id)">
+        删除
+      </button>
+      <button
+        v-show="!todo.isEdit"
+        class="btn btn-edit"
+        @click="handleEdit(todo)"
+      >
+        编辑
+      </button>
+    </li>
+  </transition>
 </template>
 
 <script>
@@ -105,5 +109,19 @@ li {
     display: none;
     margin-top: 3px;
   }
+}
+@keyframes todoLeaveAnimation {
+  from {
+    transform: scale(1, 1);
+  }
+  to {
+    transform: scale(0, 0);
+  }
+}
+.todo-leave-active {
+  animation: todoLeaveAnimation 0.4s linear;
+}
+.todo-enter-active {
+  animation: todoLeaveAnimation 0.3s linear reverse;
 }
 </style>
