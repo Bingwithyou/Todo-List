@@ -25,7 +25,7 @@ export default {
       if (!this.title.trim()) return null;
       //用户的输入包装为一个 todo 对象
       const todoObj = { id: nanoid(), title: this.title, done: false };
-      this.$emit("addTodo", todoObj);
+      this.$bus.$emit("addTodo", todoObj);
       this.title = "";
     },
   },
