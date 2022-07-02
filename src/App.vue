@@ -2,7 +2,7 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-warp">
-        <my-header @addTodo="addTodo"></my-header>
+        <my-header></my-header>
         <my-list :todos="todos"></my-list>
         <my-footer
           :todos="todos"
@@ -38,7 +38,7 @@ export default {
 
   methods: {
     // 定义一个 addTodo 方法props传给子组件'Myheader'，子组件调用该函数时可以将值带回给 App 组件
-    //   已被改写为自定义事件写法，通过 $emit(function, value) 触发，$off()解绑
+    // 已被改写为自定义事件写法，通过 $emit(function, value) 触发，$off()解绑
     addTodo(todoObj) {
       this.todos.unshift(todoObj);
     },
@@ -85,12 +85,14 @@ export default {
   },
   //   监视 Myitem 组件中是否调用了 checkTodo / deleteTodo，触发之后调用响应函数方法
   mounted() {
+    this.$bus.$on("addTodo", this.addTodo);
     this.$bus.$on("checkTodo", this.checkTodo);
     this.$bus.$on("deleteTodo", this.deleteTodo);
     this.$bus.$on("updateTodo", this.updateTodo);
   },
   //   销毁组件前，要解绑事件
   beforeDestroy() {
+    this.$bus.off("addTodo");
     this.$bus.off("deleteTodo");
     this.$bus.off("chekcTodo");
     this.$bus.off("updateTodo");
