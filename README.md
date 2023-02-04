@@ -10,7 +10,6 @@ Vue-cli build TodoList project
 vue.config.js: publicPath: ENV === "development" ? "" : "/<REPO>/"
 
 git subtree push --prefix dist origin gh-pages
-
 ```
 
 ## Project setup
