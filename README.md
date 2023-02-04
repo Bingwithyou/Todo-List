@@ -29,7 +29,9 @@ npm run lint
 ```
 
 ### gh-pages
+```
 git subtree push --prefix dist origin gh-pages
+```
 
 ### Customize configuration
 
