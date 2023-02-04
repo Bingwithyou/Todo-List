@@ -1,7 +1,16 @@
 # todo-list
 
 ```
-Vue-cli build TodoList project, just a small pratice for beginner...
+Vue-cli build TodoList project
+```
+
+### gh-pages
+```
+// vue.config.js
+const ENV = process.env.NODE_ENV;
+publicPath: ENV === "development" ? "" : "/<REPO>/"
+
+git subtree push --prefix dist origin gh-pages
 ```
 
 ## Project setup
@@ -26,11 +35,6 @@ npm run build
 
 ```
 npm run lint
-```
-
-### gh-pages
-```
-git subtree push --prefix dist origin gh-pages
 ```
 
 ### Customize configuration
